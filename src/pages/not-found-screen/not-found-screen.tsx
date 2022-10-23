@@ -1,16 +1,31 @@
+import {Link} from 'react-router-dom';
+import Logo from '../../components/logo/logo';
+
 function NotFoundScreen() {
   return (
-    <section className="result">
-      <div className="result__logo">
-        <img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83" />
-      </div>
+    <section className="game">
+      <header className="game__header">
+        <Logo />
 
-      <h2 className="result__title">Какая жалость!</h2>
-      <p className="result__total result__total--fail">
-        У вас закончились все попытки. Ничего, повезёт в следующий раз!
-      </p>
+        <svg xmlns="http://www.w3.org/2000/svg" className="timer" viewBox="0 0 780 780">
+          <circle
+            className="timer__line"
+            cx="390"
+            cy="390"
+            r="370"
+            style={{
+              filter: 'url(#blur)',
+              transform: 'rotate(-90deg) scaleY(-1)',
+              transformOrigin: 'center',
+            }}
+          />
+        </svg>
+      </header>
 
-      <button className="replay" type="button">Попробовать ещё раз</button>
+      <section className="game__screen">
+        <h1>404. Page not found</h1>
+        <Link to="/">Вернуться на главную</Link>
+      </section>
     </section>
   );
 }
