@@ -1,5 +1,7 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import {AppRoute} from '../../const';
+import {AppRoute, AuthStatus} from '../../const';
+
+import PrivateRoute from '../private-route/private-route';
 
 import WelcomeScreen from '../../pages/welcome-screen/welcome-screen';
 import AuthScreen from '../../pages/auth-screen/auth-screen';
@@ -29,7 +31,11 @@ function App({errorsCount}: AppScreenProps): JSX.Element {
 
         <Route
           path={AppRoute.Result}
-          element={<WinScreen />}
+          element={
+            <PrivateRoute authStatus={AuthStatus.NoAuth}>
+              <WinScreen />
+            </PrivateRoute>
+          }
         />
 
         <Route
