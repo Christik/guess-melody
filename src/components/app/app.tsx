@@ -1,10 +1,12 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import {AppRoute} from '../../const';
+
 import WelcomeScreen from '../../pages/welcome-screen/welcome-screen';
 import AuthScreen from '../../pages/auth-screen/auth-screen';
 import WinScreen from '../../pages/win-screen/win-screen';
 import GameOverScreen from '../../pages/game-over-screen/game-over-screen';
 import GenreQuestionScreen from '../../pages/genre-question-screen/genre-question-screen';
+import ArtistQuestionScreen from '../../pages/artist-question-screen/artist-question-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 
 type AppScreenProps = {
@@ -38,6 +40,11 @@ function App({errorsCount}: AppScreenProps): JSX.Element {
         <Route
           path={AppRoute.DevGenre}
           element={<GenreQuestionScreen />}
+        />
+
+        <Route
+          path={AppRoute.DevArtist}
+          element={<ArtistQuestionScreen />}
         />
 
         <Route
