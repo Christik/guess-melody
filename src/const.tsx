@@ -6,8 +6,7 @@ export enum AppRoute {
   Login = '/login',
   Result = '/result',
   Lose = '/lose',
-  DevArtist = '/dev-artist',
-  DevGenre = '/dev-genre',
+  NotFound = '*',
 }
 
 export enum AuthStatus {
