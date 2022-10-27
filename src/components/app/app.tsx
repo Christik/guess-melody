@@ -1,6 +1,8 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import { HelmetProvider } from 'react-helmet-async';
+import {HelmetProvider} from 'react-helmet-async';
 import {AppRoute, AuthStatus} from '../../const';
+
+import {Question} from '../../types/question';
 
 import PrivateRoute from '../private-route/private-route';
 
@@ -14,9 +16,10 @@ import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 
 type AppScreenProps = {
   errorsCount: number;
+  questions: Question[];
 };
 
-function App({errorsCount}: AppScreenProps): JSX.Element {
+function App({errorsCount, questions}: AppScreenProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
