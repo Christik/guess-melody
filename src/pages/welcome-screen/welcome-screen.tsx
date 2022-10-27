@@ -1,10 +1,14 @@
 import { Helmet } from 'react-helmet-async';
+import { useNavigate } from 'react-router-dom';
+import { AppRoute } from '../../const';
 
 type WelcomeScreenProps = {
   errorsCount: number;
 };
 
 function WelcomeScreen({errorsCount}: WelcomeScreenProps): JSX.Element {
+  const navigate = useNavigate();
+
   return (
     <section className="welcome">
       <Helmet>
@@ -15,7 +19,10 @@ function WelcomeScreen({errorsCount}: WelcomeScreenProps): JSX.Element {
         <img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83"/>
       </div>
 
-      <button className="welcome__button">
+      <button
+        className="welcome__button"
+        onClick={() => navigate(AppRoute.Game)}
+      >
         <span className="visually-hidden">Начать игру</span>
       </button>
 

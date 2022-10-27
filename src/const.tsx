@@ -2,6 +2,7 @@ export const FIRST_GAME_STEP = 0;
 
 export enum AppRoute {
   Root = '/',
+  Game = '/game',
   Login = '/login',
   Result = '/result',
   Lose = '/lose',

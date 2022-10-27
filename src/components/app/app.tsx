@@ -13,6 +13,7 @@ import GameOverScreen from '../../pages/game-over-screen/game-over-screen';
 import GenreQuestionScreen from '../../pages/genre-question-screen/genre-question-screen';
 import ArtistQuestionScreen from '../../pages/artist-question-screen/artist-question-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
+import GameScreen from '../../pages/game-screen/game-screen';
 
 type AppScreenProps = {
   errorsCount: number;
@@ -34,6 +35,11 @@ function App({errorsCount, questions}: AppScreenProps): JSX.Element {
           <Route
             path={AppRoute.Login}
             element={<AuthScreen />}
+          />
+
+          <Route
+            path={AppRoute.Game}
+            element={<GameScreen questions={questions} />}
           />
 
           <Route
