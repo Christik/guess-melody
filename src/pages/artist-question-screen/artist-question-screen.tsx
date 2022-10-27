@@ -1,7 +1,17 @@
-import { Helmet } from 'react-helmet-async';
+import {Helmet} from 'react-helmet-async';
+import {QuestionArtist, UserArtistQuestionAnswer} from '../../types/question';
+
 import Logo from '../../components/logo/logo';
 
-function ArtistQuestionScreen() {
+type ArtistQuestionScreenProps = {
+  question: QuestionArtist;
+  onAnswer: (question: QuestionArtist, answer: UserArtistQuestionAnswer) => void;
+};
+
+function ArtistQuestionScreen(props: ArtistQuestionScreenProps) {
+  const {question, onAnswer} = props;
+  const {song, answers} = question;
+
   return (
     <section className="game game--artist">
       <Helmet>
@@ -38,35 +48,35 @@ function ArtistQuestionScreen() {
           <div className="track">
             <button className="track__button track__button--play" type="button"></button>
             <div className="track__status">
-              <audio></audio>
+              <audio src={song.src}></audio>
             </div>
           </div>
         </div>
 
         <form className="game__artist">
-          <div className="artist">
-            <input className="artist__input visually-hidden" type="radio" name="answer" value="artist-1" id="answer-1" />
-            <label className="artist__name" htmlFor="answer-1">
-              <img className="artist__picture" src="img/placeholder.jpg" alt="Пелагея" />
-              Пелагея
-            </label>
-          </div>
-
-          <div className="artist">
-            <input className="artist__input visually-hidden" type="radio" name="answer" value="artist-2" id="answer-2" />
-            <label className="artist__name" htmlFor="answer-2">
-              <img className="artist__picture" src="img/placeholder.jpg" alt="Пелагея" />
-              Краснознаменная дивизия имени моей бабушки
-            </label>
-          </div>
-
-          <div className="artist">
-            <input className="artist__input visually-hidden" type="radio" name="answer" value="artist-3" id="answer-3" />
-            <label className="artist__name" htmlFor="answer-3">
-              <img className="artist__picture" src="img/placeholder.jpg" alt="Пелагея" />
-              Lorde
-            </label>
-          </div>
+          {answers.map((answer, index) => (
+            <div className="artist" key={answer.artist}>
+              <input
+                className="artist__input visually-hidden"
+                type="radio"
+                name="answer"
+                value={`artist-${index}`}
+                id={`artist-${index}`}
+                onChange={(evt) => {
+                  evt.preventDefault();
+                  onAnswer(question, answer.artist);
+                }}
+              />
+              <label className="artist__name" htmlFor={`artist-${index}`}>
+                <img
+                  className="artist__picture"
+                  src={answer.picture}
+                  alt={answer.artist}
+                />
+                {answer.artist}
+              </label>
+            </div>
+          ))}
         </form>
       </section>
     </section>

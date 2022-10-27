@@ -2,7 +2,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import {HelmetProvider} from 'react-helmet-async';
 import {AppRoute, AuthStatus} from '../../const';
 
-import {Question, QuestionGenre} from '../../types/question';
+import {Question, QuestionArtist, QuestionGenre} from '../../types/question';
 
 import PrivateRoute from '../private-route/private-route';
 
@@ -20,7 +20,7 @@ type AppScreenProps = {
 };
 
 function App({errorsCount, questions}: AppScreenProps): JSX.Element {
-  const [firstQuestion] = questions;
+  const [firstQuestion, secondQuestion] = questions;
 
   return (
     <HelmetProvider>
@@ -64,7 +64,14 @@ function App({errorsCount, questions}: AppScreenProps): JSX.Element {
 
           <Route
             path={AppRoute.DevArtist}
-            element={<ArtistQuestionScreen />}
+            element={
+              <ArtistQuestionScreen
+                question={secondQuestion as QuestionArtist}
+                onAnswer={() => {
+                  throw new Error('Функция \'onAnswer\' еще не реализована.');
+                }}
+              />
+            }
           />
 
           <Route
