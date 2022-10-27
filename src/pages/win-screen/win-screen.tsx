@@ -1,6 +1,12 @@
+import { Helmet } from 'react-helmet-async';
+
 function WinScreen() {
   return (
     <section className="result">
+      <Helmet>
+        <title>Вы настоящий меломан!</title>
+      </Helmet>
+
       <div className="result-logout__wrapper">
         <a className="result-logout__link" href="/">Выход</a>
       </div>

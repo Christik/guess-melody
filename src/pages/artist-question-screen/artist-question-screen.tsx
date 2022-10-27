@@ -1,8 +1,13 @@
+import { Helmet } from 'react-helmet-async';
 import Logo from '../../components/logo/logo';
 
 function ArtistQuestionScreen() {
   return (
     <section className="game game--artist">
+      <Helmet>
+        <title>Кто исполняет эту песню?</title>
+      </Helmet>
+
       <header className="game__header">
         <Logo />
 

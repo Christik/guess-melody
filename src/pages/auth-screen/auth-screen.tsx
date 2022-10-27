@@ -1,6 +1,12 @@
+import {Helmet} from 'react-helmet-async';
+
 function AuthScreen() {
   return (
     <section className="login">
+      <Helmet>
+        <title>Вы настоящий меломан!</title>
+      </Helmet>
+
       <div className="login__logo">
         <img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83" />
       </div>
