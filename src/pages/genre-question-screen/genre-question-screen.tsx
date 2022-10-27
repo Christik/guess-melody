@@ -1,4 +1,6 @@
 import {Helmet} from 'react-helmet-async';
+import { useState } from 'react';
+
 import {QuestionGenre} from '../../types/question';
 
 import Logo from '../../components/logo/logo';
@@ -10,6 +12,8 @@ type GenreQuestionScreenProps = {
 function GenreQuestionScreen(props: GenreQuestionScreenProps) {
   const {question} = props;
   const {genre, answers} = question;
+
+  const [userAnswers, setUserAnswers] = useState([false, false, false, false]);
 
   return (
     <section className="game game--genre">
@@ -64,6 +68,14 @@ function GenreQuestionScreen(props: GenreQuestionScreenProps) {
                     name="answer"
                     value={`answer-${index}`}
                     id={`answer-${index}`}
+                    checked={userAnswers[index]}
+                    onChange={(evt) => {
+                      setUserAnswers([
+                        ...userAnswers.slice(0, index),
+                        evt.target.checked,
+                        ...userAnswers.slice(index + 1),
+                      ]);
+                    }}
                   />
                   <label className="game__check" htmlFor={`answer-${index}`}>Отметить</label>
                 </div>
