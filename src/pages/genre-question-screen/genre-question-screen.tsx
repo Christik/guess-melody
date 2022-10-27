@@ -1,16 +1,17 @@
 import {Helmet} from 'react-helmet-async';
 import { useState } from 'react';
 
-import {QuestionGenre} from '../../types/question';
+import {QuestionGenre, UserGenreQuestionAnswer} from '../../types/question';
 
 import Logo from '../../components/logo/logo';
 
 type GenreQuestionScreenProps = {
   question: QuestionGenre;
+  onAnswer: (question: QuestionGenre, answer: UserGenreQuestionAnswer) => void;
 };
 
 function GenreQuestionScreen(props: GenreQuestionScreenProps) {
-  const {question} = props;
+  const {question, onAnswer} = props;
   const {genre, answers} = question;
 
   const [userAnswers, setUserAnswers] = useState([false, false, false, false]);
@@ -48,7 +49,14 @@ function GenreQuestionScreen(props: GenreQuestionScreenProps) {
       <section className="game__screen">
         <h2 className="game__title">Выберите {genre} треки</h2>
 
-        <form className="game__tracks">
+        <form
+          className="game__tracks"
+          onSubmit={(evt) => {
+            evt.preventDefault();
+            onAnswer(question, userAnswers);
+          }}
+        >
+
           {answers.map((answer, index) => {
             const {src} = answer;
             const key = `${index}-${src}`;
