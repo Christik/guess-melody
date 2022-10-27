@@ -8,3 +8,21 @@ export type QuestionGenre = {
   genre: string;
   answers: GenreAnswer[];
 };
+
+export type Song = {
+  artist: string;
+  src: string;
+};
+
+export type ArtistAnswer = {
+  picture: string;
+  artist: string;
+};
+
+export type QuestionArtist = {
+  type: string;
+  song: Song;
+  answers: ArtistAnswer[];
+};
+
+export type Question = QuestionArtist | QuestionGenre;
