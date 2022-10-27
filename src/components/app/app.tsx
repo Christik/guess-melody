@@ -2,7 +2,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import {HelmetProvider} from 'react-helmet-async';
 import {AppRoute, AuthStatus} from '../../const';
 
-import {Question} from '../../types/question';
+import {Question, QuestionGenre} from '../../types/question';
 
 import PrivateRoute from '../private-route/private-route';
 
@@ -20,6 +20,8 @@ type AppScreenProps = {
 };
 
 function App({errorsCount, questions}: AppScreenProps): JSX.Element {
+  const [firstQuestion] = questions;
+
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -50,7 +52,9 @@ function App({errorsCount, questions}: AppScreenProps): JSX.Element {
 
           <Route
             path={AppRoute.DevGenre}
-            element={<GenreQuestionScreen />}
+            element={
+              <GenreQuestionScreen question = {firstQuestion as QuestionGenre} />
+            }
           />
 
           <Route
