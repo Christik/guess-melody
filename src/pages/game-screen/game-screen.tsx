@@ -26,7 +26,7 @@ function GameScreen({questions}: GameScreenProps) {
       return (
         <GenreQuestionScreen
           question={question as QuestionGenre}
-          onAnswer={() => setStep(step + 1)}
+          onAnswer={() => setStep((prevStep) => (prevStep + 1))}
         />
       );
 
@@ -34,7 +34,7 @@ function GameScreen({questions}: GameScreenProps) {
       return (
         <ArtistQuestionScreen
           question={question as QuestionArtist}
-          onAnswer={() => setStep(step + 1)}
+          onAnswer={() => setStep((prevStep) => (prevStep + 1))}
         />
       );
 
