@@ -2,6 +2,7 @@ import {Helmet} from 'react-helmet-async';
 import {QuestionArtist, UserArtistQuestionAnswer} from '../../types/question';
 
 import Logo from '../../components/logo/logo';
+import AudioPlayer from '../../components/audio-player/audio-player';
 
 type ArtistQuestionScreenProps = {
   question: QuestionArtist;
@@ -46,10 +47,7 @@ function ArtistQuestionScreen(props: ArtistQuestionScreenProps) {
         <h2 className="game__title">Кто исполняет эту песню?</h2>
         <div className="game__track">
           <div className="track">
-            <button className="track__button track__button--play" type="button"></button>
-            <div className="track__status">
-              <audio src={song.src}></audio>
-            </div>
+            <AudioPlayer src={song.src} isAutoPlay />
           </div>
         </div>
 

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import {QuestionGenre, UserGenreQuestionAnswer} from '../../types/question';
 
 import Logo from '../../components/logo/logo';
+import AudioPlayer from '../../components/audio-player/audio-player';
 
 type GenreQuestionScreenProps = {
   question: QuestionGenre;
@@ -63,11 +64,7 @@ function GenreQuestionScreen(props: GenreQuestionScreenProps) {
 
             return (
               <div className="track" key={key}>
-                <button className="track__button track__button--play" type="button"></button>
-
-                <div className="track__status">
-                  <audio src={src}></audio>
-                </div>
+                <AudioPlayer src={src} isAutoPlay={index === 0} />
 
                 <div className="game__answer">
                   <input
