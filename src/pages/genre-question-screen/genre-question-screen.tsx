@@ -16,6 +16,7 @@ function GenreQuestionScreen(props: GenreQuestionScreenProps) {
   const {genre, answers} = question;
 
   const [userAnswers, setUserAnswers] = useState([false, false, false, false]);
+  const [activePlayer, setActivePlayer] = useState(0);
 
   return (
     <section className="game game--genre">
@@ -64,7 +65,13 @@ function GenreQuestionScreen(props: GenreQuestionScreenProps) {
 
             return (
               <div className="track" key={key}>
-                <AudioPlayer src={src} isAutoPlay={index === 0} />
+                <AudioPlayer
+                  src={src}
+                  isPlaying={index === activePlayer}
+                  onPlayButtonClick={() => setActivePlayer(
+                    (index === activePlayer) ? -1 : index
+                  )}
+                />
 
                 <div className="game__answer">
                   <input

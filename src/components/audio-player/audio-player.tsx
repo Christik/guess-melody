@@ -3,14 +3,14 @@ import cn from 'classnames';
 
 type AudioPlayerProps = {
   src: string;
-  isAutoPlay: boolean;
+  isPlaying: boolean;
+  onPlayButtonClick: () => void;
 };
 
 function AudioPlayer(props: AudioPlayerProps) {
-  const {src, isAutoPlay} = props;
+  const {src, isPlaying, onPlayButtonClick} = props;
 
   const [isLoading, setIsLoading] = useState(true);
-  const [isPlaying, setIsPlaying] = useState(isAutoPlay);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -49,7 +49,7 @@ function AudioPlayer(props: AudioPlayerProps) {
         )}
         type="button"
         disabled={isLoading}
-        onClick={() => setIsPlaying(!isPlaying)}
+        onClick={onPlayButtonClick}
       />
 
       <div className="track__status">

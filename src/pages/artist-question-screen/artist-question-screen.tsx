@@ -1,5 +1,7 @@
-import {Helmet} from 'react-helmet-async';
-import {QuestionArtist, UserArtistQuestionAnswer} from '../../types/question';
+import { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
+
+import { QuestionArtist, UserArtistQuestionAnswer } from '../../types/question';
 
 import Logo from '../../components/logo/logo';
 import AudioPlayer from '../../components/audio-player/audio-player';
@@ -12,6 +14,8 @@ type ArtistQuestionScreenProps = {
 function ArtistQuestionScreen(props: ArtistQuestionScreenProps) {
   const {question, onAnswer} = props;
   const {song, answers} = question;
+
+  const [isPlaying, setIsPlaying] = useState(true);
 
   return (
     <section className="game game--artist">
@@ -47,7 +51,11 @@ function ArtistQuestionScreen(props: ArtistQuestionScreenProps) {
         <h2 className="game__title">Кто исполняет эту песню?</h2>
         <div className="game__track">
           <div className="track">
-            <AudioPlayer src={song.src} isAutoPlay />
+            <AudioPlayer
+              src={song.src}
+              isPlaying={isPlaying}
+              onPlayButtonClick={() => setIsPlaying(!isPlaying)}
+            />
           </div>
         </div>
 
