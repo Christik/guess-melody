@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
 
-import {questions} from './mock/questions';
+import { questions } from './mock/questions';
+
+import { store } from './store';
 
 import App from './components/app/app';
 
@@ -15,9 +18,11 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App
-      errorsCount = {Setting.ErrorsCount}
-      questions = {questions}
-    />
+    <Provider store={store}>
+      <App
+        errorsCount = {Setting.ErrorsCount}
+        questions = {questions}
+      />
+    </Provider>
   </React.StrictMode>,
 );
