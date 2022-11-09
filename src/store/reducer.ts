@@ -1,4 +1,4 @@
-import { createReducer } from '@reduxjs/toolkit/dist/createReducer';
+import { createReducer } from '@reduxjs/toolkit';
 import { FIRST_GAME_STEP } from '../const';
 import { incrementStep, resetGame } from './action';
 
