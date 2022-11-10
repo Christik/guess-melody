@@ -4,6 +4,7 @@ import { useState } from 'react';
 import {QuestionGenre, UserGenreQuestionAnswer} from '../../types/question';
 
 import Logo from '../../components/logo/logo';
+import Mistakes from '../../components/mistakes/mistakes';
 
 type GenreQuestionScreenProps = {
   question: QuestionGenre;
@@ -40,11 +41,7 @@ function GenreQuestionScreen(props: GenreQuestionScreenProps) {
           />
         </svg>
 
-        <div className="game__mistakes">
-          <div className="wrong"></div>
-          <div className="wrong"></div>
-          <div className="wrong"></div>
-        </div>
+        <Mistakes count={3} />
       </header>
 
       <section className="game__screen">
