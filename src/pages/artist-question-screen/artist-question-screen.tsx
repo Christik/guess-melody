@@ -1,18 +1,18 @@
+import { PropsWithChildren } from 'react';
 import { Helmet } from 'react-helmet-async';
 
 import { QuestionArtist, UserArtistQuestionAnswer } from '../../types/question';
 
 import Logo from '../../components/logo/logo';
-import Mistakes from '../../components/mistakes/mistakes';
 
-type ArtistQuestionScreenProps = {
+type ArtistQuestionScreenProps = PropsWithChildren<{
   question: QuestionArtist;
   onAnswer: (question: QuestionArtist, answer: UserArtistQuestionAnswer) => void;
   renderPlayer: (src: string, playerIndex: number) => JSX.Element;
-};
+}>;
 
 function ArtistQuestionScreen(props: ArtistQuestionScreenProps) {
-  const {question, onAnswer, renderPlayer} = props;
+  const {question, onAnswer, renderPlayer, children} = props;
   const {song, answers} = question;
 
   return (
@@ -38,7 +38,7 @@ function ArtistQuestionScreen(props: ArtistQuestionScreenProps) {
           />
         </svg>
 
-        <Mistakes count={3} />
+        {children}
       </header>
 
       <section className="game__screen">

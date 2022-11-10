@@ -11,6 +11,7 @@ import withAudioPlayer from '../../hoc/with-audio-player';
 
 import ArtistQuestionScreen from '../artist-question-screen/artist-question-screen';
 import GenreQuestionScreen from '../genre-question-screen/genre-question-screen';
+import Mistakes from '../../components/mistakes/mistakes';
 
 const ArtistQuestionScreenWrapper = withAudioPlayer(ArtistQuestionScreen);
 const GenreQuestionScreenWrapper = withAudioPlayer(GenreQuestionScreen);
@@ -21,6 +22,8 @@ type GameScreenProps = {
 
 function GameScreen({questions}: GameScreenProps) {
   const step = useAppSelector((state) => state.step);
+  const mistakes = useAppSelector((state) => state.mistakes);
+
   const dispatch = useAppDispatch();
   const question = questions[step];
 
@@ -36,7 +39,9 @@ function GameScreen({questions}: GameScreenProps) {
         <GenreQuestionScreenWrapper
           question={question as QuestionGenre}
           onAnswer={() => dispatch(incrementStep())}
-        />
+        >
+          <Mistakes count={mistakes} />
+        </GenreQuestionScreenWrapper>
       );
 
     case GameType.Artist:
@@ -44,7 +49,9 @@ function GameScreen({questions}: GameScreenProps) {
         <ArtistQuestionScreenWrapper
           question={question as QuestionArtist}
           onAnswer={() => dispatch(incrementStep())}
-        />
+        >
+          <Mistakes count={mistakes} />
+        </ArtistQuestionScreenWrapper>
       );
 
     default:
