@@ -1,8 +1,6 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import {HelmetProvider} from 'react-helmet-async';
-import {AppRoute, AuthStatus} from '../../const';
-
-import {Question} from '../../types/question';
+import {AppRoute, AuthStatus, MAX_MISTAKE_COUNT} from '../../const';
 
 import PrivateRoute from '../private-route/private-route';
 
@@ -13,19 +11,14 @@ import GameOverScreen from '../../pages/game-over-screen/game-over-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import GameScreen from '../../pages/game-screen/game-screen';
 
-type AppScreenProps = {
-  errorsCount: number;
-  questions: Question[];
-};
-
-function App({errorsCount, questions}: AppScreenProps): JSX.Element {
+function App(): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route
             path={AppRoute.Root}
-            element={<WelcomeScreen errorsCount = {errorsCount} />}
+            element={<WelcomeScreen errorsCount = {MAX_MISTAKE_COUNT} />}
           />
 
           <Route
@@ -35,7 +28,7 @@ function App({errorsCount, questions}: AppScreenProps): JSX.Element {
 
           <Route
             path={AppRoute.Game}
-            element={<GameScreen questions={questions} />}
+            element={<GameScreen />}
           />
 
           <Route

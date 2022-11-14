@@ -16,13 +16,10 @@ import Mistakes from '../../components/mistakes/mistakes';
 const ArtistQuestionScreenWrapper = withAudioPlayer(ArtistQuestionScreen);
 const GenreQuestionScreenWrapper = withAudioPlayer(GenreQuestionScreen);
 
-type GameScreenProps = {
-  questions: Question[];
-};
-
-function GameScreen({questions}: GameScreenProps) {
+function GameScreen() {
   const step = useAppSelector((state) => state.step);
   const mistakes = useAppSelector((state) => state.mistakes);
+  const questions = useAppSelector((state) => state.questions);
 
   const dispatch = useAppDispatch();
   const question = questions[step];
