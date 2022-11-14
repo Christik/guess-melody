@@ -1,11 +1,11 @@
 import { Navigate } from 'react-router-dom';
 
 import { AppRoute, GameType } from '../../const';
-import { Question } from '../../types/question';
+import { Question, UserAnswer } from '../../types/question';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
 
-import { incrementStep } from '../../store/action';
+import { checkUserAnswer, incrementStep } from '../../store/action';
 
 import withAudioPlayer from '../../hoc/with-audio-player';
 
@@ -33,12 +33,17 @@ function GameScreen({questions}: GameScreenProps) {
     );
   }
 
+  const onUserAnswer = (questionItem: Question, answer: UserAnswer) => {
+    dispatch(incrementStep());
+    dispatch(checkUserAnswer({question: questionItem, answer}));
+  };
+
   switch (question.type) {
     case GameType.Genre:
       return (
         <GenreQuestionScreenWrapper
           question={question}
-          onAnswer={() => dispatch(incrementStep())}
+          onAnswer={onUserAnswer}
         >
           <Mistakes count={mistakes} />
         </GenreQuestionScreenWrapper>
@@ -48,7 +53,7 @@ function GameScreen({questions}: GameScreenProps) {
       return (
         <ArtistQuestionScreenWrapper
           question={question}
-          onAnswer={() => dispatch(incrementStep())}
+          onAnswer={onUserAnswer}
         >
           <Mistakes count={mistakes} />
         </ArtistQuestionScreenWrapper>
