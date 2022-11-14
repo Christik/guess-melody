@@ -1,7 +1,7 @@
 import { Navigate } from 'react-router-dom';
 
 import { AppRoute, GameType } from '../../const';
-import { Question, QuestionArtist, QuestionGenre } from '../../types/question';
+import { Question } from '../../types/question';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
 
@@ -37,7 +37,7 @@ function GameScreen({questions}: GameScreenProps) {
     case GameType.Genre:
       return (
         <GenreQuestionScreenWrapper
-          question={question as QuestionGenre}
+          question={question}
           onAnswer={() => dispatch(incrementStep())}
         >
           <Mistakes count={mistakes} />
@@ -47,7 +47,7 @@ function GameScreen({questions}: GameScreenProps) {
     case GameType.Artist:
       return (
         <ArtistQuestionScreenWrapper
-          question={question as QuestionArtist}
+          question={question}
           onAnswer={() => dispatch(incrementStep())}
         >
           <Mistakes count={mistakes} />
