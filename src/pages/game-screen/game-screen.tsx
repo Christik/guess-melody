@@ -26,7 +26,7 @@ function GameScreen() {
 
   if (step >= questions.length || !question) {
     return (
-      <Navigate to={AppRoute.Root} />
+      <Navigate to={AppRoute.Result} />
     );
   }
 
