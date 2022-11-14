@@ -7,3 +7,6 @@ export const resetGame = createAction('game/reset');
 
 export const checkUserAnswer =
   createAction<{question: Question; answer: UserAnswer}>('game/checkUserAnswer');
+
+export const loadQuestions =
+  createAction<Question[]>('data/loadQuestions');
