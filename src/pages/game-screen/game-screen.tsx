@@ -1,6 +1,6 @@
 import { Navigate } from 'react-router-dom';
 
-import { AppRoute, GameType } from '../../const';
+import { AppRoute, GameType, MAX_MISTAKE_COUNT } from '../../const';
 import { Question, UserAnswer } from '../../types/question';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
@@ -30,6 +30,12 @@ function GameScreen({questions}: GameScreenProps) {
   if (step >= questions.length || !question) {
     return (
       <Navigate to={AppRoute.Root} />
+    );
+  }
+
+  if (mistakes >= MAX_MISTAKE_COUNT) {
+    return (
+      <Navigate to={AppRoute.Lose} />
     );
   }
 
