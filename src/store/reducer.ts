@@ -17,7 +17,7 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(checkUserAnswer, (state, action) => {
       const {question, answer} = action.payload;
-      state.mistakes += Number(isAnswerCorrect(question, answer));
+      state.mistakes += Number(!isAnswerCorrect(question, answer));
     })
     .addCase(resetGame, (state) => {
       state.mistakes = 0;
