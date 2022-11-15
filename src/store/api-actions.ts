@@ -6,9 +6,10 @@ import { Question } from '../types/question';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 
-import { ApiRoute, AuthStatus } from '../const';
+import { ApiRoute, AuthStatus, TIMEOUT_SHOW_ERROR } from '../const';
 import { dropToken, saveToken } from '../services/token';
-import { loadQuestions, requireAuth } from './action';
+import { loadQuestions, requireAuth, setError } from './action';
+import { store } from '.';
 
 export const fetchQuestionsAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -61,5 +62,15 @@ export const logoutAction = createAsyncThunk<void, undefined, {
     await api.delete(ApiRoute.Logout);
     dropToken();
     dispatch(requireAuth(AuthStatus.NoAuth));
+  }
+);
+
+export const clearErrorAction = createAsyncThunk(
+  'game/clearError',
+  () => {
+    setTimeout(
+      () => store.dispatch(setError(null)),
+      TIMEOUT_SHOW_ERROR
+    );
   }
 );
