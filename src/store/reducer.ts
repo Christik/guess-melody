@@ -7,7 +7,8 @@ import {
   incrementStep,
   loadQuestions,
   requireAuth,
-  resetGame } from './action';
+  resetGame,
+  setError} from './action';
 
 const STEP_COUNT = 1;
 
@@ -16,6 +17,7 @@ type InitialState = {
   step: number;
   questions: Question[];
   authStatus: AuthStatus;
+  error: string | null;
 };
 
 const initialState: InitialState = {
@@ -23,6 +25,7 @@ const initialState: InitialState = {
   step: FIRST_GAME_STEP,
   questions: [],
   authStatus: AuthStatus.Unknown,
+  error: null,
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -43,5 +46,8 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(resetGame, (state) => {
       state.mistakes = 0;
       state.step = FIRST_GAME_STEP;
+    })
+    .addCase(setError, (state, action) => {
+      state.error = action.payload;
     });
 });
