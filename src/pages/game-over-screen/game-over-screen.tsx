@@ -1,6 +1,14 @@
 import { Helmet } from 'react-helmet-async';
+import { useNavigate } from 'react-router-dom';
+
+import { AppRoute } from '../../const';
+import { useAppDispatch } from '../../hooks';
+import { resetGame } from '../../store/action';
 
 function GaveOverScreen() {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
   return (
     <section className="result">
       <Helmet>
@@ -16,7 +24,16 @@ function GaveOverScreen() {
         У вас закончились все попытки. Ничего, повезёт в следующий раз!
       </p>
 
-      <button className="replay" type="button">Попробовать ещё раз</button>
+      <button
+        className="replay"
+        type="button"
+        onClick={() => {
+          dispatch(resetGame());
+          navigate(AppRoute.Game);
+        }}
+      >
+        Попробовать ещё раз
+      </button>
     </section>
   );
 }

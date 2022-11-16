@@ -1,6 +1,19 @@
 import { Helmet } from 'react-helmet-async';
+import { useNavigate } from 'react-router-dom';
+
+import { AppRoute } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { resetGame } from '../../store/action';
 
 function WinScreen() {
+  const mistakes = useAppSelector((state) => state.mistakes);
+  const step = useAppSelector((state) => state.step);
+
+  const correctAnswerCount = step - mistakes;
+
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
   return (
     <section className="result">
       <Helmet>
@@ -17,10 +30,19 @@ function WinScreen() {
 
       <h2 className="result__title">Вы настоящий меломан!</h2>
       <p className="result__total">
-        Вы ответили правильно на 6 вопросов и совершили 2 ошибки
+        Вы ответили правильно на {correctAnswerCount} вопросов и совершили {mistakes} ошибки
       </p>
 
-      <button className="replay" type="button">Сыграть ещё раз</button>
+      <button
+        className="replay"
+        type="button"
+        onClick={() => {
+          dispatch(resetGame());
+          navigate(AppRoute.Game);
+        }}
+      >
+        Сыграть ещё раз
+      </button>
     </section>
   );
 }
