@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { resetGame } from '../../store/action';
+import { logoutAction } from '../../store/api-actions';
 
 function WinScreen() {
   const mistakes = useAppSelector((state) => state.mistakes);
@@ -21,7 +22,16 @@ function WinScreen() {
       </Helmet>
 
       <div className="result-logout__wrapper">
-        <a className="result-logout__link" href="/">Выход</a>
+        <a
+          className="result-logout__link"
+          href="/"
+          onClick={(evt) => {
+            evt.preventDefault();
+            dispatch(logoutAction());
+          }}
+        >
+          Выход
+        </a>
       </div>
 
       <div className="result__logo">
