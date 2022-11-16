@@ -6,12 +6,13 @@ import { Question } from '../types/question';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 
-import { ApiRoute, AuthStatus, TIMEOUT_SHOW_ERROR } from '../const';
+import { ApiRoute, AppRoute, AuthStatus, TIMEOUT_SHOW_ERROR } from '../const';
 import { dropToken, saveToken } from '../services/token';
 import { store } from '.';
 
 import {
   loadQuestions,
+  redirectToRoute,
   requireAuth,
   setError,
   setQuestionsDataLoadingStatus } from './action';
@@ -56,6 +57,7 @@ export const loginAction = createAsyncThunk<void, AuthData, {
     const {data: {token}} = await api.post<UserData>(ApiRoute.Login, {email, password});
     saveToken(token);
     dispatch(requireAuth(AuthStatus.Auth));
+    dispatch(redirectToRoute(AppRoute.Result));
   }
 );
 
