@@ -8,8 +8,13 @@ import { UserData } from '../types/user-data';
 
 import { ApiRoute, AuthStatus, TIMEOUT_SHOW_ERROR } from '../const';
 import { dropToken, saveToken } from '../services/token';
-import { loadQuestions, requireAuth, setError } from './action';
 import { store } from '.';
+
+import {
+  loadQuestions,
+  requireAuth,
+  setError,
+  setQuestionsDataLoadingStatus } from './action';
 
 export const fetchQuestionsAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -18,7 +23,9 @@ export const fetchQuestionsAction = createAsyncThunk<void, undefined, {
 }>(
   'data/fetchQuestions',
   async (_, {dispatch, extra: api}) => {
+    dispatch(setQuestionsDataLoadingStatus(true));
     const {data} = await api.get<Question[]>(ApiRoute.Questions);
+    dispatch(setQuestionsDataLoadingStatus(false));
     dispatch(loadQuestions(data));
   }
 );

@@ -8,7 +8,8 @@ import {
   loadQuestions,
   requireAuth,
   resetGame,
-  setError} from './action';
+  setError,
+  setQuestionsDataLoadingStatus} from './action';
 
 const STEP_COUNT = 1;
 
@@ -18,6 +19,7 @@ type InitialState = {
   questions: Question[];
   authStatus: AuthStatus;
   error: string | null;
+  isQuestionsDataLoading: boolean;
 };
 
 const initialState: InitialState = {
@@ -26,6 +28,7 @@ const initialState: InitialState = {
   questions: [],
   authStatus: AuthStatus.Unknown,
   error: null,
+  isQuestionsDataLoading: false,
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -38,6 +41,9 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadQuestions, (state, action) => {
       state.questions = action.payload;
+    })
+    .addCase(setQuestionsDataLoadingStatus, (state, action) => {
+      state.isQuestionsDataLoading = action.payload;
     })
     .addCase(checkUserAnswer, (state, action) => {
       const {question, answer} = action.payload;
