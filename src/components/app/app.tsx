@@ -1,10 +1,13 @@
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import {HelmetProvider} from 'react-helmet-async';
+import { Routes, Route } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 
-import {AppRoute, AuthStatus, MAX_MISTAKE_COUNT} from '../../const';
-import { useAppSelector } from '../../hooks';
+import browserHistory from '../../browser-history';
+import HistoryRouter from '../history-route/history-router';
 
 import PrivateRoute from '../private-route/private-route';
+
+import { AppRoute, AuthStatus, MAX_MISTAKE_COUNT } from '../../const';
+import { useAppSelector } from '../../hooks';
 
 import WelcomeScreen from '../../pages/welcome-screen/welcome-screen';
 import AuthScreen from '../../pages/auth-screen/auth-screen';
@@ -24,7 +27,7 @@ function App(): JSX.Element {
 
   return (
     <HelmetProvider>
-      <BrowserRouter>
+      <HistoryRouter history={browserHistory}>
         <Routes>
           <Route
             path={AppRoute.Root}
@@ -60,7 +63,7 @@ function App(): JSX.Element {
             element={<NotFoundScreen />}
           />
         </Routes>
-      </BrowserRouter>
+      </HistoryRouter>
     </HelmetProvider>
   );
 }
