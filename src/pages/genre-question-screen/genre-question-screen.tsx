@@ -1,10 +1,12 @@
-import {Helmet} from 'react-helmet-async';
-import { ChangeEvent, PropsWithChildren } from 'react';
+import { Helmet } from 'react-helmet-async';
+import { PropsWithChildren } from 'react';
 
-import {QuestionGenre, UserGenreQuestionAnswer} from '../../types/question';
+import { QuestionGenre, UserGenreQuestionAnswer } from '../../types/question';
+
+import { useUserAnswers } from '../../hooks/use-user-answers';
 
 import Logo from '../../components/logo/logo';
-import { useUserAnswers } from '../../hooks/use-user-answers';
+import GenreQuestionItem from '../../components/genre-question-item/genre-question-item';
 
 
 type GenreQuestionScreenProps = PropsWithChildren<{
@@ -57,28 +59,17 @@ function GenreQuestionScreen(props: GenreQuestionScreenProps) {
         >
 
           {answers.map((answer, index) => {
-            const {src} = answer;
-            const key = `${index}-${src}`;
+            const key = `${index}-${answer.src}`;
 
             return (
-              <div className="track" key={key}>
-                {renderPlayer(src, index)}
-
-                <div className="game__answer">
-                  <input
-                    className="game__input visually-hidden"
-                    type="checkbox"
-                    name="answer"
-                    value={`answer-${index}`}
-                    id={`answer-${index}`}
-                    checked={userAnswers[index]}
-                    onChange={(evt: ChangeEvent<HTMLInputElement>) => {
-                      handleAnswerChange(index, evt.target.checked);
-                    }}
-                  />
-                  <label className="game__check" htmlFor={`answer-${index}`}>Отметить</label>
-                </div>
-              </div>
+              <GenreQuestionItem
+                key={key}
+                index={index}
+                answer={answer}
+                userAnswer={userAnswers[index]}
+                renderPlayer={renderPlayer}
+                onChange={handleAnswerChange}
+              />
             );
           })}
 
