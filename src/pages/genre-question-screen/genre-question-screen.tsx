@@ -1,9 +1,10 @@
 import {Helmet} from 'react-helmet-async';
-import { PropsWithChildren, useState } from 'react';
+import { ChangeEvent, PropsWithChildren } from 'react';
 
 import {QuestionGenre, UserGenreQuestionAnswer} from '../../types/question';
 
 import Logo from '../../components/logo/logo';
+import { useUserAnswers } from '../../hooks/use-user-answers';
 
 
 type GenreQuestionScreenProps = PropsWithChildren<{
@@ -16,7 +17,7 @@ function GenreQuestionScreen(props: GenreQuestionScreenProps) {
   const {question, onAnswer, renderPlayer, children} = props;
   const {genre, answers} = question;
 
-  const [userAnswers, setUserAnswers] = useState([false, false, false, false]);
+  const [userAnswers, handleAnswerChange] = useUserAnswers(question);
 
   return (
     <section className="game game--genre">
@@ -71,12 +72,8 @@ function GenreQuestionScreen(props: GenreQuestionScreenProps) {
                     value={`answer-${index}`}
                     id={`answer-${index}`}
                     checked={userAnswers[index]}
-                    onChange={(evt) => {
-                      setUserAnswers([
-                        ...userAnswers.slice(0, index),
-                        evt.target.checked,
-                        ...userAnswers.slice(index + 1),
-                      ]);
+                    onChange={(evt: ChangeEvent<HTMLInputElement>) => {
+                      handleAnswerChange(index, evt.target.checked);
                     }}
                   />
                   <label className="game__check" htmlFor={`answer-${index}`}>Отметить</label>

@@ -1,10 +1,15 @@
 import { useState } from 'react';
-import { Question } from '../types/question';
+import { Question, UserGenreQuestionAnswer } from '../types/question';
 
-export const useUserAnswers = (question: Question) => {
+type ResultUserAnswers = [
+  UserGenreQuestionAnswer,
+  (index: number, value: boolean) => void
+];
+
+export const useUserAnswers = (question: Question): ResultUserAnswers => {
   const answersQuantity = question.answers.length;
 
-  const [answers, setAnswers] = useState<boolean[]>(
+  const [answers, setAnswers] = useState<UserGenreQuestionAnswer>(
     Array.from({length: answersQuantity}, () => false)
   );
 
